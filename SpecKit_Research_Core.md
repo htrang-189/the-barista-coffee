@@ -2,162 +2,290 @@
 marp: true
 theme: default
 paginate: true
-backgroundColor: #f9f7f4
-color: #1a1a1a
+size: 16:9
+backgroundColor: #f5f3f0
+color: #2c2c2c
 style: |
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+  
   section {
-    background: linear-gradient(135deg, #f9f7f4 0%, #efe9dc 100%);
-    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f5f3f0 0%, #ede7e0 100%);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 50px 60px;
   }
-  h1 { color: #8b6f47; font-size: 2.8em; }
-  h2 { color: #8b6f47; font-size: 2em; }
-  li { font-size: 1.1em; line-height: 1.4; }
+  
+  h1 {
+    color: #8b6f47;
+    font-size: 3.2em;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+  }
+  
+  h2 {
+    color: #8b6f47;
+    font-size: 2.4em;
+    font-weight: 700;
+    border-bottom: 3px solid #d4a574;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  }
+  
+  h3 {
+    color: #6b5637;
+    font-size: 1.4em;
+    font-weight: 600;
+  }
+  
+  li {
+    font-size: 1.15em;
+    line-height: 1.8;
+    margin: 12px 0;
+  }
+  
+  table {
+    font-size: 1em;
+    margin: 20px 0;
+  }
+  
+  code {
+    background: #f0ebe4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #c85a1e;
+  }
+  
+  strong {
+    color: #8b6f47;
+    font-weight: 600;
+  }
 ---
 
 # 🎯 SpecKit Research Core
-## Spec-Driven Development Meets AI Automation
+## Deep Dive into AI-Native Spec-Driven Development
+
+**Presenter**: Trang  
+**Date**: April 5, 2026
 
 ---
 
-## Overview: Concept & Definition
+## 🌟 Overview: SpecKit Framework Definition
 
-- 🔍 **Unified Specs**: AI-readable design specifications bridge intent to execution
-- 📋 **Single Source of Truth**: One spec drives requirements, design, implementation, tests
-- 🤖 **AI Automates**: Agents generate code, tests, docs without "glue code"
-- 🚀 **60-80% Faster**: Ideation to deployment with eliminated ambiguity
+### **SpecKit = AI-Native Specification-Driven Development**
 
----
+- 🧠 **Context-Aware Execution**: AI agents understand project constitution, domain constraints, and architectural patterns
+  - Constitution acts as the "project conscience"
+  - Every decision bounded by project principles
+  - No ad-hoc workarounds or inconsistent implementations
 
-## Core Architecture
+- 🤖 **Autonomous Execution**: Agents orchestrate complete lifecycle (Spec → Plan → Tasks → Code)
+  - Self-validating artifact generation
+  - Automatic feedback loops on conflicts
+  - Human reviews at critical gates only
 
-- 🧠 **Multi-Agent**: `specify`, `plan`, `task`, `implement` agents collaborate
-- 📖 **Context**: `.specify/` maintains constitution, specs, plans, inventory
-- 🔄 **Feedback**: Agents validate outputs, adjust strategies continuously
-- 🎭 **Phases**: Each agent owns one lifecycle phase with clear gates
-
----
-
-## SpecKit vs. Cucumber & OpenAPI
-
-| Aspect | Cucumber | OpenAPI | SpecKit |
-|:-------|:---------|:--------|:--------|
-| **Glue Code** | 30-40% overhead | 60-70% manual | Eliminated |
-| **Coupling** | Loose (drifts) | Medium | Tight (true) |
-| **Scope** | BDD only | APIs only | Full-stack |
-| **Automation** | Partial | Partial | End-to-end |
+- 📊 **Spec-as-Code**: Specifications are structured data, not documents
+  - Machine-readable source of truth
+  - Version-controlled alongside implementation
+  - Executable acceptance criteria
 
 ---
 
-## Roles Transform in SpecKit SDLC
+## 🏗️ Core Architecture: Four Specialized Agents
 
-| Role | Traditional | SpecKit |
-|:-----|:-----------|:--------|
-| **BA/PO** | Write docs → hand-off | Define specs → validate |
-| **Dev** | Implement from specs | Review code → architect |
-| **QA** | Manual test scripts | Define scenarios → auto-execute |
+| **Agent** | **Role** | **Input** | **Output** |
+|:----------|:---------|:---------|:----------|
+| 🎯 **SPECIFY** | Requirement Clarification | User intent (natural language) | `spec.md` + `research.md` |
+| 📐 **PLAN** | Architectural Design | Validated spec | `plan.md` + `contracts/` + `data-model.md` |
+| ✅ **TASKS** | Work Orchestration | Approved plan | `tasks.md` (ordered + dependency-aware) |
+| 🚀 **IMPLEMENT** | Execution & Delivery | Task list + specs | Code + Tests + Docs + Infrastructure |
 
----
-
-## SpecKit Folder: `.specify/`
-
-- 📁 **`templates/`**: spec, plan, tasks, constitution, checklist, agent templates
-- 📁 **`scripts/bash/`**: check-prereqs, setup-plan, create-feature, update-context
-- 📁 **`memory/`**: constitution.md (values, principles, constraints)
-- 📁 **`integrations/`**: GitHub, CI/CD, IDE, LLM configs
+### **Agent Communication**
+- Each agent validates predecessor outputs against **constitution**
+- Agents communicate via **artifact dependency chain**
+- **Zero manual glue code**: Specifications flow directly to implementation
 
 ---
 
-## Step 1: SPECIFY (Input → spec.md)
+## 🔄 The Critical Loop: SPECIFY ↔ CLARIFY (VERY IMPORTANT!)
 
-- 📥 **Input**: Natural language feature description
-- 🤖 **Agent**: `/speckit.specify` generates structured spec
-- 📤 **Output**: User stories (P1, P2, P3), research.md
-- ✅ **Gate**: Constitution compliance
-
----
-
-## Step 2: PLAN (spec.md → plan.md)
-
-- 📥 **Input**: Feature specification
-- 🤖 **Agent**: `/speckit.plan` designs architecture
-- 📤 **Output**: plan.md, data-model.md, contracts/, quickstart.md
-- ✅ **Gate**: Feasibility & architecture review
-
----
-
-## Step 3: TASKS (plan.md → tasks.md)
-
-- 📥 **Input**: Implementation plan
-- 🤖 **Agent**: `/speckit.tasks` generates ordered tasks
-- 📤 **Output**: tasks.md (Setup → Foundation → User Stories)
-- ✅ **Result**: [P] markers show parallel execution groups
-
----
-
-## Step 4: IMPLEMENT (tasks.md → Code)
-
-- 📥 **Input**: Task list + specs
-- 🤖 **Agent**: `/speckit.implement` executes all tasks
-- 📤 **Output**: Code + Tests + Docs + Infrastructure-as-code
-- ✅ **Validation**: Each task verified vs spec
-
----
-
-## Artifact Dependency Chain
+### **The "No-Clarification" Gate**: 100% Clarity Requirement
 
 ```
-User Input → SPECIFY → spec.md
-→ PLAN → plan.md + data-model + contracts
-→ TASKS → tasks.md
-→ IMPLEMENT → Code + Tests + Docs
+BA/PO provides feature description
+         ↓
+    /speckit.specify
+         ↓
+   spec.md generated
+         ↓
+   ⚠️  CLARIFICATION REQUIRED?
+     (Agent flags ambiguities)
+         ↓
+   YES → BA/PO clarifies → LOOP BACK ↻
+         ↓
+    NO → 100% CLARITY ACHIEVED ✅
+         ↓
+   ONLY THEN: Permission to PLAN
 ```
 
-- 📍 Single Source of Truth
-- 🔗 Traceability: Code → Spec
-- 🎯 Tests from specs
+### **Why This Gate Exists**
+- 📍 **Ambiguity costs**: 1 unclear spec = 3+ rework cycles
+- 🎯 **BA/PO owns clarity**: Developers execute, don't interpret
+- 🔐 **Constitution validation**: Every spec must align with project principles
+- ✨ **Prevents cascading failures**: Bad spec → bad plan → bad code
 
 ---
 
-## Real-World Example: Payment Processing
-
-| Phase | Output | Time |
-|:------|:-------|:-----|
-| SPECIFY | 5 user stories | 1h |
-| PLAN | Stripe architecture | 2h |
-| TASKS | 23 ordered tasks | 1h |
-| IMPLEMENT | Code + tests + config | 5h |
-| **Total** | **Production-ready** | **2 days** |
-| Traditional | Same | **2 weeks** |
-| **Gain** | **70-75% faster** | ✅ |
-
----
-
-## SpecKit Lifecycle & Creativity
+## 📊 SpecKit Lifecycle: Constitution → Spec → Plan → Implementation
 
 ```
-SPECIFY → PLAN → TASKS → IMPLEMENT
-  ↓        ↓       ↓        ↓
- Feedback loops + validation gates
+═════════════════════════════════════════════════════════════════
+
+🏛️  CONSTITUTION (Project "Brain")
+    ├─ Values & principles
+    ├─ Technical constraints
+    ├─ Quality standards
+    └─ Governance rules
+         ↓
+    ⚖️  ALL DECISIONS MUST ALIGN
+
+║
+
+📋 SPECIFICATION (Single Source of Truth)
+    ├─ User stories (P1, P2, P3)
+    ├─ Acceptance criteria
+    ├─ Research decisions
+    └─ Traceability tags
+         ↓
+    🔗 EVERYTHING REFERENCES SPEC
+
+║
+
+🎨 PLAN (Architecture Document)
+    ├─ Tech stack rationale
+    ├─ Entity relationships
+    ├─ API contracts
+    └─ Deployment topology
+         ↓
+    🏗️  STRUCTURE FROM SPEC
+
+║
+
+⚙️  IMPLEMENTATION (Artifact Generation)
+    ├─ Source code
+    ├─ Tests (E2E, integration, unit)
+    ├─ Documentation
+    └─ Infrastructure-as-code
+         ↓
+    ✅ VALIDATED AGAINST SPEC
+
+═════════════════════════════════════════════════════════════════
 ```
 
-- 🧠 **Contextual Solutions**: Interprets intent, generates creative implementations
-- 🔮 **Pattern Recognition**: Detects spec conflicts, optimization opportunities
-- 💡 **Learning**: Domain knowledge builds continuously
+### **Key Principle**: Spec Traceability
+- Every line of code → links to spec requirement
+- Every test → validates acceptance criteria
+- Every design decision → justified in plan (references spec)
 
 ---
 
-## Key Takeaways
+## 📁 Folder Structure: `.specify/` as Project "Brain"
 
-- 🎯 **Spec-First Framework**: AI automates intent-to-code translation
-- 📋 **Specification = King**: Output quality = spec clarity
-- 🤖 **AI Orchestrator**: Agents handle mechanics, humans design strategy
-- 🌟 **Multiplier Effect**: Expertise + structure + automation = velocity
-- 📊 **Artifact-Driven**: Single truth, full traceability
+### **The Project Brain Architecture**
+
+```
+.specify/                          ← PROJECT BRAIN LOCATION
+│
+├─── memory/
+│    └── constitution.md           ← Values, principles, constraints (IMMUTABLE)
+│
+├─── templates/                    ← Standardized formats
+│    ├── spec-template.md          → User story structure
+│    ├── plan-template.md          → Architecture format
+│    ├── tasks-template.md         → Task orchestration schema
+│    ├── constitution-template.md  → Governance template
+│    └── checklist-template.md     → Quality gates
+│
+├─── scripts/bash/                 ← Automation engines
+│    ├── check-prerequisites.sh    → Pre-flight validation
+│    ├── setup-plan.sh             → Initialize planning phase
+│    ├── create-new-feature.sh     → Feature scaffold generator
+│    └── update-agent-context.sh   → Context synchronization
+│
+└─── integrations/                 ← External tool connectors
+     ├── GitHub config             → PR templates, branch rules
+     ├── CI/CD config              → Build pipeline hooks
+     └── LLM provider config       → Agent model configuration
+```
+
+### **Why `.specify/` is the "Brain"**
+- 🧠 **Central Knowledge**: Constitution enforces project consistency
+- 🔄 **Feedback Loops**: Scripts validate artifacts against principles
+- 📚 **Learning System**: Patterns stored for future decision-making
+- 🛡️ **Governance**: Templates ensure quality standards applied automatically
 
 ---
 
-# 🎓 Discussion
+## 👥 Roles Transformation: From Implementers to Architects
 
-**SpecKit transforms development into specification and architecture discipline.**
+### **The Evolution of Development Roles**
 
-*Building better, faster, with confidence.*
+| **Role** | **Traditional Model** | **SpecKit Model** | **Mindset Shift** |
+|:---------|:-------------------|:-----------------|:-----------------|
+| **BA/PO** | Write docs → Hand off to dev | Define specs → Clarify until 100% clear | *"What do we build?"* → *"Is our intent clear?"* |
+| **Developer** | Implement from specs → Write tests | Review agent code → Architect patterns | *"How do I code this?"* → *"Is this design sound?"* |
+| **QA/Test** | Manual test scripts → Regression | Define scenarios → Review test coverage | *"Does it work?"* → *"Is coverage complete?"* |
+
+### **New Unified Role: "Specification Architect"**
+- All roles become co-owners of specification quality
+- Specifications are artifacts to be architected, not just written
+- Code reviews shift from syntax → design alignment with spec
+- Testing becomes specification validation, not post-hoc verification
+
+---
+
+## 🎯 Key Takeaways: Traceability, Velocity, Automation
+
+### **1. 🔗 Traceability: End-to-End Accountability**
+```
+User Requirement
+    ↓
+Spec Acceptance Criteria
+    ↓
+Test Case
+    ↓
+Source Code
+    ↓
+Deployment Config
+```
+- Every artifact linked to source requirement
+- Risk: easily identify impact of requirements changes
+- Compliance: traceability built-in, not retrofitted
+
+### **2. ⚡ Velocity: 70-75% Faster Development**
+| **Metric** | **Traditional** | **SpecKit** | **Gain** |
+|:-----------|:---------------|:-----------|:---------|
+| Time to code | 2-3 weeks | 3-5 days | **5-6x faster** |
+| Rework cycles | 3-5 cycles | 0-1 cycle | **75% less** |
+| Team alignment | ~40% overhead | ~5% overhead | **8x better** |
+
+### **3. 🤖 Automation of Mechanics, Humans on Strategy**
+- **Machines handle**: Code generation, test execution, documentation, deployment
+- **Humans handle**: Architecture decisions, specification clarity, design trade-offs
+- **Result**: Development teams evolve from "coders" → "architects"
+
+---
+
+## 🚀 Closing: The Future is Specification-Driven
+
+> *"In SpecKit, we don't write code.* ***We architect specifications.****"*
+
+**The competency shift**: 
+- ❌ *"Good at coding"* → ✅ *"Good at specifying"*
+- ❌ *"Fast implementation"* → ✅ *"Clear architecture"*
+- ❌ *"Testing rigor"* → ✅ *"Specification rigor"*
+
+**Next wave of development**:
+- 🌐 Teams that master specification discipline will dominate
+- 🤖 AI handles mechanics; humans focus on creativity
+- 🏆 Winner: Organization with best specification culture
+
+---
