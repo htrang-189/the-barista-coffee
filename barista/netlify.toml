@@ -1,0 +1,57 @@
+# Netlify configuration for Next.js 16 with API routes
+# This configuration ensures proper deployment and serverless function handling
+
+[build]
+  # Command to build Next.js
+  command = "npm run build"
+  
+  # Directory where the build output is placed
+  # For Next.js with serverless functions, we use .next
+  publish = ".next"
+
+[functions]
+  # Directory for Netlify serverless functions
+  directory = "netlify/functions"
+  
+  # Use Node.js runtime for API routes
+  node_bundler = "esbuild"
+
+# Redirect rules for client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  # Only for spa routing, not needed for Next.js but added for safety
+  conditions = { Role = ["none"] }
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Content Security Policy
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    
+    # Additional security headers
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Environment variables (reference - set these in Netlify dashboard)
+# [context.production.environment]
+#   NODE_ENV = "production"
+
+# Context-specific settings for production
+[context.production]
+  command = "npm run build"
+  publish = ".next"
+
+# Context-specific settings for preview deployments
+[context.preview]
+  command = "npm run build"
+  publish = ".next"
+
+# Context-specific settings for branch deployments
+[context.deploy-preview]
+  command = "npm run build"
+  publish = ".next"
