@@ -108,37 +108,129 @@ style: |
 
 ---
 
-## Case Study: The Barista Coffee App - Real-World Fix
+## SpecKit Folder Structure: `.specify/` Directory
 
-### **Scenario: Product Images Not Displaying on Netlify**
-- 🖼️ **Problem**: App worked locally but showed 404 errors in production for Unsplash image URLs
-- 🔧 **Traditional Approach**: Spend 2-3 hours debugging—check Netlify config, verify image domains, test image optimization
-- ✅ **SpecKit Approach**: Specification captured required image URLs and Netlify configuration requirements
+### **Core Folders and Files**
+- 📁 **`templates/`**: Standard document templates
+  - `spec-template.md` → Feature specification structure
+  - `plan-template.md` → Implementation planning framework
+  - `tasks-template.md` → Task orchestration template
+  - `constitution-template.md` → Project principles and constraints
+  - `checklist-template.md` → Validation criteria templates
+  - `agent-file-template.md` → Agent behavior customization
+
+- 📁 **`scripts/bash/`**: Automation orchestration
+  - `check-prerequisites.sh` → Pre-flight validation
+  - `setup-plan.sh` → Initialize planning phase
+  - `create-new-feature.sh` → Feature scaffold generator
+  - `update-agent-context.sh` → Context synchronization
+  - `common.sh` → Shared utilities and helpers
+
+- 📁 **`memory/`**: Persistent knowledge base
+  - `constitution.md` → Project values, principles, constraints, patterns
+
+- 📁 **`integrations/`**: External tool connectors
+  - GitHub, CI/CD, IDE, LLM provider configurations
 
 ---
 
-## Barista Case Study: The Fix Process
+## SpecKit Step-by-Step Execution & Outputs
 
-### **Phase 1: Specification Validation**
-- 📋 Agent reviewed `plan.md` and identified missing Netlify deployment configuration
-- 🎯 Automated checklist flagged: "No netlify.toml found for Next.js deployment"
-
-### **Phase 2: Intelligent Implementation**
-- 🤖 Agent generated complete `netlify.toml` with proper build settings, security headers, and redirect rules
-- 🔄 Agent verified Unsplash URLs were accessible before committing changes
-
-### **Phase 3: Automated Deployment Integration**
-- 📦 Generated configuration included serverless function routing and client-side redirect rules
-- ✅ Change pushed to GitHub → Netlify auto-deployed → Issue resolved in <30 minutes total
+### **Step 1: SPECIFY** (Input → spec.md)
+- 📥 **Input**: Natural language feature description from user
+- 🤖 **Agent Action**: `/speckit.specify` interprets requirements and generates structured specification
+- 📤 **Output Files Created**:
+  - `specs/[###-feature]/spec.md` → User stories with priority levels (P1, P2, P3)
+  - `specs/[###-feature]/research.md` → Technical research and decisions
+- ✅ **Validation Gate**: Constitution compliance check—ensures specification aligns with project principles
 
 ---
 
-## Barista Case Study: The Multiplier Effect
+## SpecKit Execution: PLAN Phase
 
-- 🚀 **Speed**: What would take a developer 3-4 hours took <30 minutes with SpecKit guidance
-- 📊 **Accuracy**: AI followed exact Next.js + Netlify best practices rather than manual trial-and-error
-- 🔗 **Traceability**: Every configuration decision traced back to specification requirements
-- 🎓 **Knowledge Transfer**: Team gains understanding of *why* specific config was needed, not just *that* it works
+### **Step 2: PLAN** (spec.md → plan.md)
+- 📥 **Input**: Feature specification from Step 1
+- 🤖 **Agent Action**: `/speckit.plan` designs architecture and technical approach
+- 📤 **Output Files Created**:
+  - `specs/[###-feature]/plan.md` → Architecture, tech stack, project structure
+  - `specs/[###-feature]/data-model.md` → Entity relationships and schemas
+  - `specs/[###-feature]/quickstart.md` → Integration scenarios and setup guide
+  - `specs/[###-feature]/contracts/` → API specifications and test requirements
+- 🔍 **Design Review**: Agents validate feasibility against constitution and dependencies
+- ⚠️ **Gate**: Plan must pass constitution and architecture review before proceeding
+
+---
+
+## SpecKit Execution: TASKS Phase
+
+### **Step 3: TASKS** (plan.md → tasks.md)
+- 📥 **Input**: Implementation plan and design artifacts from Step 2
+- 🤖 **Agent Action**: `/speckit.tasks` generates ordered, dependency-aware task list
+- 📤 **Output File Created**:
+  - `specs/[###-feature]/tasks.md` → Implementation tasks organized by user story
+    - Phase 1: Setup (Project initialization)
+    - Phase 2: Foundation (Platform infrastructure)
+    - Phase 3-N: User stories (Parallel implementation groups)
+- 🎯 **Task Properties**:
+  - [P] markers indicate parallel-executable tasks
+  - Dependencies explicitly tracked
+  - Each task linked to specification requirements
+- ✅ **Optimization**: Tasks grouped to enable independent delivery of MVP increments
+
+---
+
+## SpecKit Execution: IMPLEMENT Phase
+
+### **Step 4: IMPLEMENT** (tasks.md → Code + Tests + Docs)
+- 📥 **Input**: Complete task list with design specifications
+- 🤖 **Agent Action**: `/speckit.implement` executes all tasks according to orchestration plan
+- 📤 **Output Generated**:
+  - **Source Code**: Feature implementation per architecture plan
+  - **Tests**: E2E, integration, and unit tests from contract specs
+  - **Documentation**: API docs, deployment guides, troubleshooting
+  - **Configuration**: Infrastructure-as-code files (Netlify, Docker, K8s)
+- 🔄 **Validation Loop**: Each task validated against specification before proceeding
+- ✅ **Completion Checklist**: Automated pre-launch validation
+
+---
+
+## Artifact Dependency Chain: Single Source of Truth
+
+```
+user description (your words)
+         ↓
+    [SPECIFY]
+         ↓
+  spec.md (structured requirements)
+         ↓
+    [PLAN]
+         ↓
+plan.md, data-model.md, contracts/
+         ↓
+    [TASKS]
+         ↓
+tasks.md (ordered implementation)
+         ↓
+   [IMPLEMENT]
+         ↓
+Source code + Tests + Documentation
+```
+
+- 📍 **Single Source of Truth**: Changes to spec flow through all downstream artifacts
+- 🔗 **Traceability**: Every line of code traces back to specification requirement
+- 🎯 **Testability**: Tests generated directly from specification acceptance scenarios
+
+---
+
+## SpecKit Output Example: Complete Workflow
+
+### **Real-World Transformation**
+- 🎯 **User Input**: "Add payment processing with multiple payment methods"
+- 📋 **SPECIFY Output**: 5 user stories (Wallet, Credit Card, Bank Transfer, Refund, Receipt)
+- 📐 **PLAN Output**: Stripe integration, webhook architecture, payment state machine
+- ✅ **TASKS Output**: 23 tasks across 4 phases, parallel deployment possible
+- 🚀 **IMPLEMENT Output**: API routes + transaction models + E2E tests + deployment config
+- ⏱️ **Timeline**: 2 days instead of 2 weeks (specification clarity eliminated ambiguity)
 
 ---
 
@@ -176,6 +268,22 @@ style: |
 
 ---
 
+## Specification-Driven Workflow: Beyond Traditional Development
+
+### **SpecKit vs. Traditional Cycle**
+- ⏱️ **Traditional**: Requirements → Code → Test → Debug → Deploy (2-3 weeks)
+- ⚡ **SpecKit**: Specify → Plan → Tasks → Implement → Deploy (3-5 days)
+- 📊 **Reduction**: 70-75% less calendar time due to eliminated ambiguity and parallel execution
+- 🎯 **Key Difference**: Specifications drive ALL downstream decisions—no interpretation variance
+
+### **Team Alignment Through Specifications**
+- 👥 **No More Silos**: BA/PO, Dev, QA all read same specification
+- 🔄 **Feedback Loops**: Agents flag specification issues before code execution
+- ✅ **Reduced Rework**: Changes to specification ripple automatically through all artifacts
+- 📈 **Quality Progressive**: Earlier validation gates catch issues at specification phase—cheaper to fix
+
+---
+
 ## The Future of Development: From Code Writing to Design Thinking
 
 - 🔬 **Evolution**: SDLC shifts from "How do I code this?" to "What architecture solves this problem?"
@@ -190,8 +298,8 @@ style: |
 - 🎯 **SpecKit is Not Code Generation**: It's a specification-first framework where AI automates the translation from intent to implementation
 - 📋 **Specification is King**: Quality output depends on specification clarity—GIGO principle inverted to "Garbage out of garbage specs"
 - 🤖 **AI as Orchestrator**: Autonomous agents handle mechanical tasks; humans focus on creative design, architecture, and validation
-- 🚀 **Proven Scalability**: Barista case study demonstrates real-world productivity gains and quality improvements
 - 🌟 **The Multiplier Effect**: Combines domain expertise + structured thinking + automation = exponential team velocity
+- 📊 **Artifact-Driven Development**: Single source of truth ensures traceability from user intent to production code
 
 ---
 
