@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cat-espresso",
+    "name": "Espresso Bar",
+    "displayOrder": 1,
+    "description": "Strong Italian favorites"
+  },
+  {
+    "id": "cat-vietnamese",
+    "name": "Vietnamese Coffee",
+    "displayOrder": 2,
+    "description": "Traditional and modern Vietnamese"
+  },
+  {
+    "id": "cat-iced",
+    "name": "Iced Summer",
+    "displayOrder": 3,
+    "description": "Refreshing cold beverages"
+  },
+  {
+    "id": "cat-pastries",
+    "name": "Pastries & Snacks",
+    "displayOrder": 4,
+    "description": "Fresh baked goods"
+  }
+]

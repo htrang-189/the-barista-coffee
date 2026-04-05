@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F9F7F4;
+  --foreground: #1A1A1A;
+  --primary: #1A1A1A;
+  --secondary: #8B6F47;
+  --accent: #D4A574;
+  --color-primary: #1A1A1A;
+  --color-secondary: #8B6F47;
+  --color-accent: #D4A574;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1A1A1A;
+    --foreground: #F9F7F4;
+  }
+}
+
+body {
+  background-color: rgb(249 247 244);
+  color: rgb(26 26 26);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Typography Utilities */
+h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+small {
+  font-size: 14px;
+  color: rgb(107 101 96);
+}
+
+/* Focus Ring Utility */
+@layer base {
+  *:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(139 111 71 / 0.1), 0 0 0 1px rgb(139 111 71);
+  }
+
+  button:focus-visible,
+  a:focus-visible {
+    box-shadow: 0 0 0 3px rgb(139 111 71 / 0.1), 0 0 0 1px rgb(139 111 71);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

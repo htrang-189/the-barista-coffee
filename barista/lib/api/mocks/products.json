@@ -1,0 +1,72 @@
+[
+  {
+    "id": "prod-americano",
+    "name": "Americano",
+    "price": 35000,
+    "categoryId": "cat-espresso",
+    "imageUrl": "",
+    "description": "Double espresso with hot water",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-cappuccino",
+    "name": "Cappuccino",
+    "price": 45000,
+    "categoryId": "cat-espresso",
+    "imageUrl": "",
+    "description": "Espresso with steamed milk and foam",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-latte",
+    "name": "Latte",
+    "price": 45000,
+    "categoryId": "cat-espresso",
+    "imageUrl": "",
+    "description": "Espresso with steamed milk",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-ca-phe-den",
+    "name": "Cà Phê Đen",
+    "price": 40000,
+    "categoryId": "cat-vietnamese",
+    "imageUrl": "",
+    "description": "Traditional Vietnamese black coffee",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-ca-phe-sua",
+    "name": "Cà Phê Sữa",
+    "price": 45000,
+    "categoryId": "cat-vietnamese",
+    "imageUrl": "",
+    "description": "Vietnamese coffee with condensed milk",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-iced-americano",
+    "name": "Iced Americano",
+    "price": 40000,
+    "categoryId": "cat-iced",
+    "imageUrl": "",
+    "description": "Chilled Americano perfect for summer",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  },
+  {
+    "id": "prod-iced-latte",
+    "name": "Iced Latte",
+    "price": 50000,
+    "categoryId": "cat-iced",
+    "imageUrl": "",
+    "description": "Creamy iced latte",
+    "isAvailable": true,
+    "createdAt": "2026-04-05T00:00:00Z"
+  }
+]

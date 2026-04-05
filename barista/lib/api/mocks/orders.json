@@ -1,0 +1,64 @@
+[
+  {
+    "id": "ORD-20260405-001",
+    "items": [
+      {
+        "productId": "prod-americano",
+        "productName": "Americano",
+        "quantity": 2,
+        "price": 35000,
+        "size": "M",
+        "sugarLevel": "No",
+        "iceLevel": "Regular",
+        "subtotal": 70000
+      }
+    ],
+    "total": 70000,
+    "customerName": "John Doe",
+    "phoneNumber": "0912345678",
+    "deliveryAddress": "123 Nguyen Hue St, District 1, HCMC",
+    "driverNote": "Leave at reception",
+    "paymentMethod": "COD",
+    "status": "Completed",
+    "createdAt": "2026-04-05T08:00:00Z",
+    "statusUpdatedAt": "2026-04-05T08:30:00Z",
+    "estimatedDeliveryTime": "2026-04-05T08:20:00Z",
+    "trackingUrl": "/order/ORD-20260405-001"
+  },
+  {
+    "id": "ORD-20260405-002",
+    "items": [
+      {
+        "productId": "prod-cappuccino",
+        "productName": "Cappuccino",
+        "quantity": 1,
+        "price": 45000,
+        "size": "L",
+        "sugarLevel": "50%",
+        "iceLevel": "Light",
+        "subtotal": 45000
+      },
+      {
+        "productId": "prod-ca-phe-sua",
+        "productName": "Cà Phê Sữa",
+        "quantity": 1,
+        "price": 45000,
+        "size": "M",
+        "sugarLevel": "75%",
+        "iceLevel": "No",
+        "subtotal": 45000
+      }
+    ],
+    "total": 90000,
+    "customerName": "Jane Smith",
+    "phoneNumber": "0987654321",
+    "deliveryAddress": "456 Tran Hung Dao St, District 5, HCMC",
+    "driverNote": "Ring bell three times",
+    "paymentMethod": "COD",
+    "status": "OutForDelivery",
+    "createdAt": "2026-04-05T10:15:00Z",
+    "statusUpdatedAt": "2026-04-05T10:45:00Z",
+    "estimatedDeliveryTime": "2026-04-05T10:45:00Z",
+    "trackingUrl": "/order/ORD-20260405-002"
+  }
+]
