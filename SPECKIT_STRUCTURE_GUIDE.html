@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpecKit Framework Structure & Purpose Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            margin: -20px -20px 40px -20px;
+            border-radius: 0 0 8px 8px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        header .meta {
+            margin-top: 15px;
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .toc {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .toc ul {
+            list-style: none;
+            columns: 2;
+            gap: 30px;
+        }
+        
+        .toc li {
+            margin-bottom: 10px;
+        }
+        
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        section {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 25px 0 15px 0;
+        }
+        
+        h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 15px 0 10px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+        
+        table thead {
+            background: #f0f4ff;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        table tbody tr:hover {
+            background-color: #f8f9ff;
+        }
+        
+        pre {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            overflow-x: auto;
+            border-radius: 4px;
+        }
+        
+        code {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+        
+        pre code {
+            color: #333;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .structure-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-family: 'Monaco', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .card h4 {
+            margin-top: 0;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin: 40px -20px 0 -20px;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .emoji {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .toc ul {
+                columns: 1;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Complete SpecKit Framework Structure & Purpose Guide</h1>
+        <div class="subtitle">AI-Native Specification-Driven Development</div>
+        <div class="meta">
+            <p><strong>Last Updated:</strong> April 5, 2026</p>
+            <p><strong>Framework:</strong> SpecKit - AI-Native Specification-Driven Development</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>📖 Table of Contents</h2>
+            <ul>
+                <li><a href="#executive-summary">Executive Summary</a></li>
+                <li><a href="#specify-directory">The .specify/ Directory (Project Brain)</a></li>
+                <li><a href="#structure-folder">.specify/ Folder Structure</a></li>
+                <li><a href="#specs-directory">specs/ Directory (Artifact Repository)</a></li>
+                <li><a href="#barista-directory">barista/ Directory (Implementation)</a></li>
+                <li><a href="#docs-directory">docs/ Directory (External Documentation)</a></li>
+                <li><a href="#root-files">Root Level Files</a></li>
+                <li><a href="#dependency-chain">Artifact Dependency Chain</a></li>
+                <li><a href="#folder-matrix">Folder Purpose Matrix</a></li>
+                <li><a href="#access-control">Access Control & Governance</a></li>
+                <li><a href="#github-integration">GitHub Integration Guide</a></li>
+                <li><a href="#initialization">Initialization Checklist</a></li>
+                <li><a href="#quick-start">Quick Start: Navigating SpecKit</a></li>
+            </ul>
+        </div>
+
+        <!-- Executive Summary -->
+        <section id="executive-summary">
+            <h2><span class="emoji">🎯</span>Executive Summary</h2>
+            <p>SpecKit organizes a specification-driven development workflow through a hierarchical folder structure that serves as the <strong>"project brain"</strong>. Every folder has a specific purpose aligned with the development lifecycle:</p>
+            
+            <div class="structure-box">PROJECT_ROOT/
+├── .specify/               ← SPECKIT CORE (Project Brain)
+├── specs/                  ← ARTIFACT REPOSITORY (Generated specs)
+├── barista/                ← IMPLEMENTATION (Application code)
+└── docs/                   ← EXTERNAL DOCUMENTATION</div>
+        </section>
+
+        <!-- .specify/ Directory -->
+        <section id="specify-directory">
+            <h2><span class="emoji">📁</span>Part 1: .specify/ Directory (Project Brain)</h2>
+            
+            <h3>Location</h3>
+            <p><code class="highlight">/.specify/</code></p>
+            
+            <h3>Purpose</h3>
+            <p>Central governance, templates, scripts, and knowledge repository</p>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <h4>Owner</h4>
+                    <p>All team members (BA/PO, Dev, QA)</p>
+                </div>
+                <div class="card">
+                    <h4>Access</h4>
+                    <p>Version-controlled, team-shared</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- .specify/ Structure Detail -->
+        <section id="structure-folder">
+            <h2><span class="emoji">🧠</span>.specify/ Folder Structure</h2>
+            
+            <h3>1. memory/ Folder</h3>
+            <p><strong>Path:</strong> <code>/.specify/memory/</code></p>
+            <p><strong>Purpose:</strong> Persistent project knowledge base</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Purpose</th>
+                        <th>Owner</th>
+                        <th>Update Frequency</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>constitution.md</code></td>
+                        <td>Project principles, values, tech constraints</td>
+                        <td>Product Lead</td>
+                        <td>Upon project changes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Contents of constitution.md</h4>
+            <ul>
+                <li>📋 <strong>Project Values:</strong> Core principles guiding decisions</li>
+                <li>🔧 <strong>Technical Constraints:</strong> Tech stack rules, performance requirements</li>
+                <li>🎯 <strong>Architecture Patterns:</strong> Approved design patterns, anti-patterns</li>
+                <li>⚖️ <strong>Governance Rules:</strong> Code review standards, testing requirements</li>
+                <li>🛡️ <strong>Security Policies:</strong> Data protection, compliance requirements</li>
+            </ul>
+
+            <h4>Example</h4>
+            <pre><code># Project Constitution
+
+## Values
+- Clarity before speed
+- User-centric design
+- Security by default
+
+## Technical Constraints
+- Framework: Next.js 16+
+- Database: PostgreSQL
+- API: REST + GraphQL
+
+## Governance
+- All specs require 100% clarity gate
+- Test coverage: minimum 80%
+- Code review: 2+ approvals required</code></pre>
+
+            <h3>2. templates/ Folder</h3>
+            <p><strong>Path:</strong> <code>/.specify/templates/</code></p>
+            <p><strong>Purpose:</strong> Standardized markdown templates for consistent artifact generation</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Template</th>
+                        <th>Purpose</th>
+                        <th>Used By</th>
+                        <th>Format</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>spec-template.md</code></td>
+                        <td>User story structure, acceptance criteria format</td>
+                        <td>SPECIFY agent</td>
+                        <td>Markdown</td>
+                    </tr>
+                    <tr>
+                        <td><code>plan-template.md</code></td>
+                        <td>Architecture, tech stack, project structure</td>
+                        <td>PLAN agent</td>
+                        <td>Markdown</td>
+                    </tr>
+                    <tr>
+                        <td><code>tasks-template.md</code></td>
+                        <td>Task orchestration, phase organization</td>
+                        <td>TASKS agent</td>
+                        <td>Markdown</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3. scripts/bash/ Folder</h3>
+            <p><strong>Path:</strong> <code>/.specify/scripts/bash/</code></p>
+            <p><strong>Purpose:</strong> Automation and orchestration scripts for agent coordination</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Script</th>
+                        <th>Purpose</th>
+                        <th>Function</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>check-prerequisites.sh</code></td>
+                        <td>Pre-flight validation</td>
+                        <td>Validates dependencies, checks project readiness</td>
+                    </tr>
+                    <tr>
+                        <td><code>setup-plan.sh</code></td>
+                        <td>Initialize planning phase</td>
+                        <td>Creates directory structure, validates spec</td>
+                    </tr>
+                    <tr>
+                        <td><code>create-new-feature.sh</code></td>
+                        <td>Feature scaffold generator</td>
+                        <td>Generates new feature folder structure</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>4. integrations/ Folder</h3>
+            <p><strong>Path:</strong> <code>/.specify/integrations/</code></p>
+            <p><strong>Purpose:</strong> External tool connectors and configuration</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Integration</th>
+                        <th>Purpose</th>
+                        <th>Configuration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>GitHub</strong></td>
+                        <td>PR templates, branch rules, automation</td>
+                        <td><code>.github/</code> config</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CI/CD</strong></td>
+                        <td>Build pipeline, deployment hooks</td>
+                        <td><code>workflows/</code>, build triggers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IDE</strong></td>
+                        <td>VSCode settings, editor configuration</td>
+                        <td><code>.vscode/settings.json</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- specs/ Directory -->
+        <section id="specs-directory">
+            <h2><span class="emoji">📊</span>Part 2: specs/ Directory (Artifact Repository)</h2>
+            
+            <h3>Location & Purpose</h3>
+            <p><strong>Location:</strong> <code>/specs/</code></p>
+            <p><strong>Purpose:</strong> Centralized repository for all generated specifications</p>
+            <p><strong>Generated By:</strong> SPECIFY, PLAN, TASKS agents</p>
+
+            <h3>Structure</h3>
+            <div class="structure-box">specs/
+├── 001-main-menu-page/
+│   ├── spec.md
+│   ├── research.md
+│   ├── plan.md
+│   ├── data-model.md
+│   ├── quickstart.md
+│   ├── contracts/
+│   │   ├── api-contracts.md
+│   │   ├── data-contracts.md
+│   │   └── test-requirements.md
+│   └── tasks.md
+├── 002-checkout-page/
+└── 003-order-tracking/</div>
+
+            <h3>Feature Folder Naming Convention</h3>
+            <ul>
+                <li><strong>Format:</strong> <code>NNN-feature-name/</code></li>
+                <li><strong>Example:</strong> <code>001-main-menu-page</code>, <code>002-checkout-page</code></li>
+                <li><strong>Rationale:</strong> Sequential numbering + kebab-case for consistency</li>
+            </ul>
+
+            <h3>Key Files in Each Feature Folder</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>File</th>
+                        <th>Phase</th>
+                        <th>Purpose</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>spec.md</code></td>
+                        <td>SPECIFY</td>
+                        <td>User stories, acceptance criteria</td>
+                        <td>BA/PO</td>
+                    </tr>
+                    <tr>
+                        <td><code>plan.md</code></td>
+                        <td>PLAN</td>
+                        <td>Architecture, design decisions</td>
+                        <td>Solution Architect</td>
+                    </tr>
+                    <tr>
+                        <td><code>tasks.md</code></td>
+                        <td>TASKS</td>
+                        <td>Implementation tasks, dependencies</td>
+                        <td>Project Manager</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- barista/ Directory -->
+        <section id="barista-directory">
+            <h2><span class="emoji">🚀</span>Part 3: barista/ Directory (Implementation)</h2>
+            
+            <h3>Location & Purpose</h3>
+            <p><strong>Location:</strong> <code>/barista/</code></p>
+            <p><strong>Purpose:</strong> Actual application source code and infrastructure</p>
+            <p><strong>Generated By:</strong> IMPLEMENT agent (based on tasks.md)</p>
+
+            <h3>Structure</h3>
+            <div class="structure-box">barista/
+├── app/                      ← Next.js App Router
+│   ├── api/                  → REST API routes
+│   ├── checkout/page.tsx     → Checkout page
+│   ├── menu/page.tsx         → Menu listing page
+│   └── page.tsx              → Homepage
+├── components/               ← React Components
+│   ├── checkout/
+│   ├── menu/
+│   └── common/
+├── lib/                      ← Utilities & Libraries
+│   ├── api/
+│   └── checkout-validation.ts
+├── store/                    ← State Management (Zustand)
+├── cypress/                  ← E2E Tests
+├── next.config.ts
+├── package.json
+└── netlify.toml</div>
+
+            <h3>Key Subfolders</h3>
+            <div class="card">
+                <h4>app/ (Next.js App Router)</h4>
+                <p>Houses all pages and API routes. Organized by feature/page.</p>
+            </div>
+
+            <div class="card">
+                <h4>components/ (React Components)</h4>
+                <p>Organized by feature. <code>common/</code> contains reusable components.</p>
+            </div>
+
+            <div class="card">
+                <h4>lib/ (Utilities)</h4>
+                <p>API client initialization, validation logic, helper functions.</p>
+            </div>
+
+            <div class="card">
+                <h4>store/ (State Management)</h4>
+                <p>Zustand store for cart state and application state.</p>
+            </div>
+        </section>
+
+        <!-- docs/ Directory -->
+        <section id="docs-directory">
+            <h2><span class="emoji">📖</span>Part 4: docs/ Directory (External Documentation)</h2>
+            
+            <h3>Location & Purpose</h3>
+            <p><strong>Location:</strong> <code>/docs/</code> (root level or <code>barista/</code>)</p>
+            <p><strong>Purpose:</strong> User-facing and team documentation</p>
+            <p><strong>Owner:</strong> Technical Writer / Developer</p>
+
+            <h3>Contents</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Purpose</th>
+                        <th>Audience</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>DOCUMENTATION.md</code></td>
+                        <td>Complete API reference, setup guide</td>
+                        <td>Developers, Consumers</td>
+                    </tr>
+                    <tr>
+                        <td><code>LAUNCH_CHECKLIST.md</code></td>
+                        <td>Pre-launch validation checklist</td>
+                        <td>QA, DevOps</td>
+                    </tr>
+                    <tr>
+                        <td><code>DEPLOYMENT_GUIDE.md</code></td>
+                        <td>Deployment instructions</td>
+                        <td>DevOps Engineers</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Root Level Files -->
+        <section id="root-files">
+            <h2><span class="emoji">🔗</span>Part 5: Root Level Files (Project Configuration)</h2>
+            
+            <div class="structure-box">PROJECT_ROOT/
+├── .specify/                ← Core governance
+├── .github/                 ← GitHub configuration
+├── .gitignore
+├── .env.local
+├── .env.production
+├── plan.md
+├── tasks.md
+├── SpecKit_Research_Core.md
+├── SPECKIT_STRUCTURE_GUIDE.md
+├── README.md
+├── package.json
+└── tsconfig.json</div>
+        </section>
+
+        <!-- Dependency Chain -->
+        <section id="dependency-chain">
+            <h2><span class="emoji">🎯</span>Part 6: Artifact Dependency Chain</h2>
+            
+            <h3>How SpecKit Structures Flow Through Folders</h3>
+            
+            <div class="structure-box">
+LIFECYCLE FLOW
+═════════════════════════════════════════════════════════════════
+
+1️⃣ SPECIFY PHASE
+   Input:  User description (BA/PO conversation)
+   Output: /specs/001-feature/spec.md + research.md
+   Validation Gate: Constitution compliance
+
+2️⃣ PLAN PHASE
+   Input:  /specs/001-feature/spec.md (validated)
+   Output: /specs/001-feature/plan.md + data-model.md + contracts/
+   Validation Gate: Architecture review
+
+3️⃣ TASKS PHASE
+   Input:  /specs/001-feature/plan.md (approved)
+   Output: /specs/001-feature/tasks.md (ordered + dependencies)
+   Task Properties: [P] markers for parallel execution
+
+4️⃣ IMPLEMENT PHASE
+   Input:  /specs/001-feature/tasks.md (complete)
+   Output: Code generated in /barista/ folder
+   Code Locations:
+   - Source Code: app/, components/, lib/ subdirectories
+   - Tests: cypress/ directory
+   - Docs: DOCUMENTATION.md at root
+   - Config: netlify.toml, next.config.ts
+
+═════════════════════════════════════════════════════════════════
+            </div>
+
+            <h3>Traceability Matrix: Spec → Code Mapping</h3>
+            <div class="structure-box">
+/specs/001-feature/spec.md (User Story)
+    ↓
+/specs/001-feature/plan.md (Architecture Decision → Why)
+    ↓
+/specs/001-feature/contracts/api-contracts.md (API Design)
+    ↓
+/specs/001-feature/tasks.md (Task: "Implement GET /api/users")
+    ↓
+/barista/app/api/users/route.ts (Actual Implementation)
+    ↓
+/barista/cypress/e2e/user-api.cy.ts (Test from Acceptance Criteria)
+            </div>
+        </section>
+
+        <!-- Folder Matrix -->
+        <section id="folder-matrix">
+            <h2><span class="emoji">📊</span>Part 7: Folder Purpose Matrix</h2>
+            
+            <h3>Complete Reference Table</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Folder</th>
+                        <th>Purpose</th>
+                        <th>Lifecycle Phase</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.specify/memory/</code></td>
+                        <td>Constitutional governance</td>
+                        <td>All phases</td>
+                        <td>Product Lead</td>
+                    </tr>
+                    <tr>
+                        <td><code>.specify/templates/</code></td>
+                        <td>Template standards</td>
+                        <td>Setup</td>
+                        <td>Tech Lead</td>
+                    </tr>
+                    <tr>
+                        <td><code>.specify/scripts/bash/</code></td>
+                        <td>Automation orchestration</td>
+                        <td>All phases</td>
+                        <td>DevOps</td>
+                    </tr>
+                    <tr>
+                        <td><code>specs/[NNN]/</code></td>
+                        <td>Specification artifacts</td>
+                        <td>Specify-Plan-Tasks</td>
+                        <td>BA/PO, Arch, Dev</td>
+                    </tr>
+                    <tr>
+                        <td><code>barista/app/</code></td>
+                        <td>Pages and API routes</td>
+                        <td>Implement</td>
+                        <td>Backend Dev</td>
+                    </tr>
+                    <tr>
+                        <td><code>barista/cypress/</code></td>
+                        <td>End-to-end tests</td>
+                        <td>Test & Validate</td>
+                        <td>QA Engineer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Access Control -->
+        <section id="access-control">
+            <h2><span class="emoji">🔐</span>Part 8: Access Control & Governance</h2>
+            
+            <h3>Folder Access by Role</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Folder</th>
+                        <th>BA/PO</th>
+                        <th>Developer</th>
+                        <th>QA/Tester</th>
+                        <th>DevOps</th>
+                        <th>Solution Architect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.specify/memory/</code></td>
+                        <td>✅ Review</td>
+                        <td>🔒 Read</td>
+                        <td>✅ Review</td>
+                        <td>✅ Read</td>
+                        <td>✅ Admin</td>
+                    </tr>
+                    <tr>
+                        <td><code>.specify/</code></td>
+                        <td>✅ Collaborate</td>
+                        <td>✅ Collaborate</td>
+                        <td>✅ Read</td>
+                        <td>✅ Admin</td>
+                        <td>✅ Admin</td>
+                    </tr>
+                    <tr>
+                        <td><code>specs/</code></td>
+                        <td>✅ Create</td>
+                        <td>✅ Review</td>
+                        <td>✅ Review</td>
+                        <td>🔒 Read</td>
+                        <td>✅ Admin</td>
+                    </tr>
+                    <tr>
+                        <td><code>barista/</code></td>
+                        <td>🔒 View</td>
+                        <td>✅ Write</td>
+                        <td>🔒 View</td>
+                        <td>🔒 View</td>
+                        <td>✅ Review</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p><strong>Legend:</strong> ✅ Full Access | 🔒 Restricted | ✅ Admin = Full admin rights</p>
+        </section>
+
+        <!-- GitHub Integration -->
+        <section id="github-integration">
+            <h2><span class="emoji">🚀</span>Part 9: GitHub Integration Guide</h2>
+            
+            <h3>How SpecKit Folders Map to GitHub</h3>
+            <div class="structure-box">
+GitHub Repository: the-barista-coffee
+├── .github/
+│   ├── workflows/        ← CI/CD automation
+│   ├── ISSUE_TEMPLATE/   ← Issue templates
+│   └── prompts/          ← Agent prompts
+├── .specify/             ← Protected: Review required on changes
+├── specs/                ← Main branch only, PR required
+└── barista/              ← Feature branches, PR reviews
+            </div>
+
+            <h3>GitHub Branch Strategy</h3>
+            <div class="structure-box">
+main (master branch)
+├─ Protected: All changes via PR
+├─ .specify/ changes: Admin review only
+├─ specs/ changes: Automatic (agent-generated)
+└─ barista/ changes: Code review required
+
+feature/NNN-feature-name (feature branches)
+├─ Created per feature
+├─ One-to-one mapping with /specs/NNN-feature-name/
+└─ Merged via PR to main after approval
+            </div>
+        </section>
+
+        <!-- Initialization -->
+        <section id="initialization">
+            <h2><span class="emoji">📋</span>Part 10: Initialization Checklist</h2>
+            
+            <h3>Setting Up SpecKit Folder Structure</h3>
+            <pre><code># 1. Initialize .specify/ directory
+$ mkdir -p .specify/{memory,templates,scripts/bash,integrations}
+
+# 2. Create constitution.md (foundational)
+$ cp .specify/templates/constitution-template.md .specify/memory/constitution.md
+
+# 3. Create specs/ directory
+$ mkdir -p specs
+
+# 4. Create barista/ application directory (if new project)
+$ mkdir -p barista/{app,components,lib,store,cypress/e2e}
+
+# 5. Create docs/ for documentation
+$ mkdir -p docs
+
+# 6. Version control all folders
+$ git add .specify/ specs/ barista/ docs/
+$ git commit -m "chore: initialize SpecKit folder structure"</code></pre>
+        </section>
+
+        <!-- Quick Start -->
+        <section id="quick-start">
+            <h2><span class="emoji">🎓</span>Quick Start: Navigating SpecKit</h2>
+            
+            <div class="card">
+                <h4>❓ "Where do I find the project rules?"</h4>
+                <p><strong>Answer:</strong> <code>/.specify/memory/constitution.md</code></p>
+            </div>
+
+            <div class="card">
+                <h4>❓ "Where should I document my feature spec?"</h4>
+                <p><strong>Answer:</strong> <code>/specs/[###-feature-name]/spec.md</code></p>
+            </div>
+
+            <div class="card">
+                <h4>❓ "Where is the API implementation?"</h4>
+                <p><strong>Answer:</strong> <code>/barista/app/api/[endpoint]/route.ts</code></p>
+            </div>
+
+            <div class="card">
+                <h4>❓ "Where are the E2E tests?"</h4>
+                <p><strong>Answer:</strong> <code>/barista/cypress/e2e/</code></p>
+            </div>
+
+            <div class="card">
+                <h4>❓ "Where is the deployment config?"</h4>
+                <p><strong>Answer:</strong> <code>/barista/netlify.toml</code> or <code>.specify/integrations/</code></p>
+            </div>
+
+            <div class="card">
+                <h4>❓ "Where are the architecture decisions documented?"</h4>
+                <p><strong>Answer:</strong> <code>/specs/[###-feature-name]/plan.md</code></p>
+            </div>
+        </section>
+
+        <!-- Summary -->
+        <section id="summary">
+            <h2><span class="emoji">✅</span>Summary: SpecKit Folder Purpose at a Glance</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Folder</th>
+                        <th>What</th>
+                        <th>Why</th>
+                        <th>When</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>.specify/memory/</code></td>
+                        <td>Constitution & governance</td>
+                        <td>Source of truth for project rules</td>
+                        <td>Once at start</td>
+                    </tr>
+                    <tr>
+                        <td><code>.specify/templates/</code></td>
+                        <td>Standard formats</td>
+                        <td>Consistency across all artifacts</td>
+                        <td>Per project setup</td>
+                    </tr>
+                    <tr>
+                        <td><code>.specify/scripts/</code></td>
+                        <td>Automation</td>
+                        <td>Orchestrate agent execution</td>
+                        <td>Per agent invocation</td>
+                    </tr>
+                    <tr>
+                        <td><code>specs/[NNN]/</code></td>
+                        <td>Feature specifications</td>
+                        <td>Complete feature documentation</td>
+                        <td>Per feature lifecycle</td>
+                    </tr>
+                    <tr>
+                        <td><code>barista/</code></td>
+                        <td>Application code</td>
+                        <td>Actual implementation</td>
+                        <td>Per development sprint</td>
+                    </tr>
+                    <tr>
+                        <td><code>docs/</code></td>
+                        <td>User-facing docs</td>
+                        <td>Maintain documentation</td>
+                        <td>Post-implementation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <p><strong>Document Version:</strong> 1.0</p>
+        <p><strong>Last Updated:</strong> April 5, 2026</p>
+        <p><strong>Framework:</strong> SpecKit v1.0</p>
+        <p><strong>Maintainer:</strong> Solution Architecture Team</p>
+        <p style="margin-top: 20px; opacity: 0.8;">Generated from SPECKIT_STRUCTURE_GUIDE.md</p>
+    </footer>
+</body>
+</html>
